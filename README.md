@@ -17,6 +17,3 @@ arma3docker is a Docker container that sets up a dedicated server for Arma 3.
 - `STEAM_USER` and `STEAM_PASS` set in `.env`
 - if rootless docker is not set up, the `armafiles` folder needs to be created and its permissions need to be corrected with `mkdir armafiles && chown -R 1000:1000 armafiles`
 - run the container with `docker compose up`
-
-## important
-- the `clean.sh` script can be used to wipe the container and everything associated with it except for the mounts
