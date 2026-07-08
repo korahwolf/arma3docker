@@ -1,6 +1,6 @@
 services:
   armaserver:
-    build: .
+    image: ghcr.io/korahwolf/arma3docker:latest
     entrypoint: ["/entrypoint.sh"]
     container_name: armaserver
     network_mode: host
