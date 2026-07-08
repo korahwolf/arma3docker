@@ -1,0 +1,11 @@
+services:
+  armaserver:
+    build: .
+    entrypoint: ["/entrypoint.sh"]
+    container_name: armaserver
+    network_mode: host
+    restart: unless-stopped
+    volumes:
+      - ./armafiles:/home/steam/armafiles
+      - ./armaconfig:/home/steam/armaconfig
+    env_file: .env
