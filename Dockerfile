@@ -14,10 +14,6 @@ RUN groupadd -g 1000 steam \
 COPY entrypoint.sh /entrypoint.sh
 RUN chmod +x /entrypoint.sh
 
-RUN mkdir -p /defaults
-COPY server.cfg /defaults/server.cfg
-COPY workshop_ids.txt /defaults/workshop_ids.txt
-
 USER steam
 
 RUN mkdir -p /home/steam/steamcmd
