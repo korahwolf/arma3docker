@@ -9,7 +9,6 @@ services:
       - "2304:2304/udp"
       - "2305:2305/udp"
       - "2306:2306/udp"
-      - "6822:22"
     restart: unless-stopped
     volumes:
       - ./profiles:/home/steam/.local/share:rw
