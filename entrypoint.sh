@@ -1,12 +1,13 @@
 #!/bin/bash
 set -e
-set -x
 
-INSTALL_DIR="/home/steam/armafiles"
+INSTALL_DIR="/home/steam/files"
+CONFIG_DIR="/home/steam/config"
 STEAMCMD="/home/steam/steamcmd/steamcmd.sh"
 
-
 needs_rename_fix=0
+
+chown -R 1000:1000 /home/steam
 
 
 # download server and workshop mods
@@ -20,14 +21,14 @@ args=(
 while read -r id; do
     [ -z "$id" ] && continue
     if [ ! -e "$INSTALL_DIR/steamapps/workshop/content/107410/$id/" ]; then
-    	args+=(+workshop_download_item 107410 "$id" validate)
-	needs_rename_fix=1
+        args+=(+workshop_download_item 107410 "$id" validate)
+        needs_rename_fix=1
     fi
-done < /home/steam/armaconfig/workshop_ids.txt
+done < "$CONFIG_DIR/workshop_ids.txt"
 
 args+=(+quit)
 
-"$STEAMCMD" "${args[@]}"
+gosu steam "$STEAMCMD" "${args[@]}"
 
 
 # add a symlink for all the mod files
@@ -36,7 +37,14 @@ shopt -s nullglob
 
 for dir in "$INSTALL_DIR/steamapps/workshop/content/107410/"*/; do
     mod_id=$(basename "$dir")
-    ln -sfn "$dir" "$INSTALL_DIR/@$mod_id"
+
+    # delete mods that are not in the mod list anymore
+    if ! grep -Fxq "$mod_id" "$CONFIG_DIR/workshop_ids.txt"; then
+        rm -rfv "$INSTALL_DIR/@$mod_id" "$dir"
+        continue
+    fi
+
+    gosu steam ln -sfvn "$dir" "$INSTALL_DIR/@$mod_id"
 done
 
 
@@ -58,8 +66,10 @@ if [ "$needs_rename_fix" -eq 1 ]; then
     done
 fi
 
+
 # start server (final process)
 
 cd "$INSTALL_DIR"
+
 mods=$(find . -maxdepth 1 -type l -name '@*' -printf '%f;' | sed 's/;$//')
-exec ./arma3server_x64 -config=/home/steam/armaconfig/server.cfg -mod="$mods"
+exec gosu steam ./arma3server_x64 -config=$CONFIG_DIR/server.cfg -mod="$mods"
