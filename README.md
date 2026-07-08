@@ -3,7 +3,7 @@ arma3docker is a Docker container that sets up a dedicated server for Arma 3.
 
 ## features
 - adjustment of server config (server.cfg)
-- downloading and updating of workshop mods
+- management of workshop mods
 
 ## dependencies
 - docker
