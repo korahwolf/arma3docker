@@ -1,16 +1,18 @@
 services:
-  armaserver:
+  arma3docker:
     image: ghcr.io/korahwolf/arma3docker:latest
     entrypoint: ["/entrypoint.sh"]
-    container_name: armaserver
+    container_name: arma3docker
     ports:
       - "2302:2302/udp"
       - "2303:2303/udp"
       - "2304:2304/udp"
       - "2305:2305/udp"
       - "2306:2306/udp"
+      - "6822:22"
     restart: unless-stopped
     volumes:
-      - ./armafiles:/home/steam/armafiles
-      - ./armaconfig:/home/steam/armaconfig
+      - ./profiles:/home/steam/.local/share:rw
+      - ./files:/home/steam/files:rw
+      - ./config:/home/steam/config:rw
     env_file: .env
