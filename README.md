@@ -9,12 +9,12 @@ arma3docker is a Docker container that sets up a dedicated server for Arma 3.
 - docker
 - docker compose
 
-## build
+## build and run
 - clone the repository with `git clone https://github.com/korahwolf/arma3docker --depth 1`
 - navigate into the repo with `cd arma3docker`
 - adjust the server configuration and change the passwords in `armaconfig/server.cfg`
 - add your desired workshop mods in `armaconfig/workshop_ids.txt`
-- set `STEAM_USER` and `STEAM_PASS` in `.env`
+- `STEAM_USER` and `STEAM_PASS` set in `.env`
 - run the container with `docker compose up`
 
 ## additional tips
