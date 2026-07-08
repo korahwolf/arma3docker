@@ -9,15 +9,6 @@ STEAMCMD="/home/steam/steamcmd/steamcmd.sh"
 needs_rename_fix=0
 
 
-# default config files
-
-[ -f /home/steam/armaconfig/server.cfg ] || \
-    cp /defaults/server.cfg /home/steam/armaconfig/server.cfg
-
-[ -f /home/steam/armaconfig/workshop_ids.txt ] || \
-    cp /defaults/workshop_ids.txt /home/steam/armaconfig/workshop_ids.txt
-
-
 # download server and workshop mods
 
 args=(
