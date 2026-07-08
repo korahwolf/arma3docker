@@ -13,7 +13,7 @@ arma3docker is a Docker container that sets up a dedicated server for Arma 3.
 - create an empty folder and navigate into it
 - download [docker-compose.yml](https://github.com/korahwolf/arma3docker/blob/main/docker-compose.yml)
 - create a folder called `config` that holds an empty file `workshop_ids.txt` and the example [server.cfg](https://github.com/korahwolf/arma3docker/blob/main/config/server.cfg)
-- set `STEAM_USER` and `STEAM_PASS` in a `.env` file
+- set `STEAM_USER` and `STEAM_PASS` in a `.env` file. the account used here must own Arma 3 to be able to download workshop mods.
 - run `docker compose up -d` (as superuser if needed)
 
 ## building
