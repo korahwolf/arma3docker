@@ -1,7 +1,6 @@
 services:
   arma3docker:
     image: ghcr.io/korahwolf/arma3docker:latest
-    entrypoint: ["/entrypoint.sh"]
     container_name: arma3docker
     ports:
       - "2302:2302/udp"
