@@ -10,9 +10,11 @@ RUN dpkg --add-architecture i386 \
 RUN groupadd -g 1000 steam \
     && useradd -m -u 1000 -g 1000 steam
 
-COPY entrypoint.sh /entrypoint.sh
-RUN chmod +x /entrypoint.sh
-
 RUN mkdir -p /home/steam/steamcmd
 RUN curl -sqL "https://steamcdn-a.akamaihd.net/client/installer/steamcmd_linux.tar.gz" | tar zxvf - -C /home/steam/steamcmd
 RUN chmod +x /home/steam/steamcmd/steamcmd.sh
+
+COPY entrypoint.sh /entrypoint.sh
+RUN chmod +x /entrypoint.sh
+
+ENTRYPOINT [ "/entrypoint.sh" ]
