@@ -20,6 +20,7 @@ args=(
 
 while read -r id; do
     [ -z "$id" ] && continue
+    [[ $STEAM_USER == "anonymous" ]] && continue
     if [ ! -e "$INSTALL_DIR/steamapps/workshop/content/107410/$id/" ]; then
         args+=(+workshop_download_item 107410 "$id" validate)
         needs_rename_fix=1
